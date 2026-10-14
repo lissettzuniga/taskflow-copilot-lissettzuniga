@@ -1,0 +1,98 @@
+Verificando docs\ARQUITECTURA.md contra C:\Users\Lenovo\taskflow-copilot-lissettzuniga
+
+[OK]         línea 7    paquete   com.taskflow  ->  src\main\java\com\taskflow
+[OK]         línea 9    ruta      src/main/java/com/taskflow/controller  ->  src\main\java\com\taskflow\controller
+[OK]         línea 9    clase     TaskController  ->  src\main\java\com\taskflow\controller\TaskController.java
+[OK]         línea 9    clase     ProjectController  ->  src\main\java\com\taskflow\controller\ProjectController.java
+[OK]         línea 10   ruta      src/main/java/com/taskflow/service  ->  src\main\java\com\taskflow\service
+[OK]         línea 10   clase     TaskService  ->  src\main\java\com\taskflow\service\TaskService.java
+[OK]         línea 10   clase     ProjectService  ->  src\main\java\com\taskflow\service\ProjectService.java
+[OK]         línea 11   ruta      src/main/java/com/taskflow/repository  ->  src\main\java\com\taskflow\repository
+[OK]         línea 11   clase     TaskRepository  ->  src\main\java\com\taskflow\repository\TaskRepository.java
+[OK]         línea 11   clase     ProjectRepository  ->  src\main\java\com\taskflow\repository\ProjectRepository.java
+[OK]         línea 12   ruta      src/main/java/com/taskflow/model  ->  src\main\java\com\taskflow\model
+[OK]         línea 12   clase     Task  ->  src\main\java\com\taskflow\model\Task.java
+[OK]         línea 12   clase     Project  ->  src\main\java\com\taskflow\model\Project.java
+[OK]         línea 13   ruta      src/main/java/com/taskflow/dto  ->  src\main\java\com\taskflow\dto
+[OK]         línea 13   ruta      src/main/java/com/taskflow/mapper  ->  src\main\java\com\taskflow\mapper
+[OK]         línea 13   clase     TaskMapper  ->  src\main\java\com\taskflow\mapper\TaskMapper.java
+[OK]         línea 14   ruta      src/main/java/com/taskflow/config  ->  src\main\java\com\taskflow\config
+[OK]         línea 14   ruta      src/main/java/com/taskflow/security  ->  src\main\java\com\taskflow\security
+[OK]         línea 14   clase     SecurityConfig  ->  src\main\java\com\taskflow\config\SecurityConfig.java
+[OK]         línea 14   clase     ProjectSecurity  ->  src\main\java\com\taskflow\security\ProjectSecurity.java
+[OK]         línea 15   ruta      src/main/java/com/taskflow/advice  ->  src\main\java\com\taskflow\advice
+[OK]         línea 15   clase     GlobalExceptionHandler  ->  src\main\java\com\taskflow\advice\GlobalExceptionHandler.java
+[OK]         línea 16   ruta      src/main/java/com/taskflow/exception  ->  src\main\java\com\taskflow\exception
+[OK]         línea 16   clase     TaskValidationException  ->  src\main\java\com\taskflow\exception\TaskValidationException.java
+[OK]         línea 16   clase     TaskNotFoundException  ->  src\main\java\com\taskflow\exception\TaskNotFoundException.java
+[OK]         línea 18   endpoint  POST /projects/{projectId}/tasks  ->  POST en src\main\java\com\taskflow\controller\TaskController.java
+[OK]         línea 20   ruta      src/main/java/com/taskflow/controller/TaskController.java  ->  src\main\java\com\taskflow\controller\TaskController.java
+[OK]         línea 21   miembro   TaskController.createTask  ->  src\main\java\com\taskflow\controller\TaskController.java
+[OK]         línea 21   anotación @Valid  ->  se usa en 3 archivo(s), p. ej. src\main\java\com\taskflow\controller\AuthController.java
+[OK]         línea 21   nombre    projectId  ->  aparece en 12 archivo(s), p. ej. src\main\java\com\taskflow\controller\TaskController.java
+[OK]         línea 21   miembro   ProjectService.buscarPorId  ->  src\main\java\com\taskflow\service\ProjectService.java
+[OK]         línea 21   clase     ProjectNotFoundException  ->  src\main\java\com\taskflow\exception\ProjectNotFoundException.java
+[OK]         línea 22   miembro   TaskService.crear  ->  src\main\java\com\taskflow\service\TaskService.java
+[OK]         línea 22   ruta      src/main/java/com/taskflow/service/TaskService.java  ->  src\main\java\com\taskflow\service\TaskService.java
+[OK]         línea 22   miembro   TaskMapper.aEntidadNueva  ->  src\main\java\com\taskflow\mapper\TaskMapper.java
+[OK]         línea 22   ruta      src/main/java/com/taskflow/mapper/TaskMapper.java  ->  src\main\java\com\taskflow\mapper\TaskMapper.java
+[REVISA]     línea 22   miembro   TaskRepository.save  ->  no está escrito en src\main\java\com\taskflow\repository\TaskRepository.java, que hereda (extends JpaRepository<Task, Long>); el nombre aparece en src\main\java\com\taskflow\config\DataSeeder.java
+[OK]         línea 22   ruta      src/main/java/com/taskflow/repository/TaskRepository.java  ->  src\main\java\com\taskflow\repository\TaskRepository.java
+[EXTERNA]    línea 22   clase     JpaRepository  ->  JpaRepository no es archivo del proyecto; el código la usa en 3 archivo(s), p. ej. src\main\java\com\taskflow\repository\ProjectRepository.java
+[EXTERNA]    línea 22   clase     Long  ->  Long no es archivo del proyecto; el código la usa en 26 archivo(s), p. ej. src\main\java\com\taskflow\controller\ProjectController.java
+[OK]         línea 23   miembro   TaskMapper.aResponse  ->  src\main\java\com\taskflow\mapper\TaskMapper.java
+[REVISA]     línea 23   clase     Location  ->  Location no se usa en el código; solo sale en comentarios o textos, p. ej. src\main\java\com\taskflow\controller\ProjectController.java
+[OK]         línea 23   endpoint  /tasks/{id}  ->  GET en src\main\java\com\taskflow\controller\TaskController.java
+[OK]         línea 24   miembro   Task.crear  ->  src\main\java\com\taskflow\model\Task.java
+[OK]         línea 24   ruta      src/main/java/com/taskflow/advice/GlobalExceptionHandler.java  ->  src\main\java\com\taskflow\advice\GlobalExceptionHandler.java
+[OK]         línea 28   ruta      src/main/java/com/taskflow/model/Task.java  ->  src\main\java\com\taskflow\model\Task.java
+[OK]         línea 28   nombre    setStatus  ->  aparece en 4 archivo(s), p. ej. src\main\java\com\taskflow\config\SecurityConfig.java
+[OK]         línea 28   nombre    estaVencida  ->  aparece en 2 archivo(s), p. ej. src\main\java\com\taskflow\model\Task.java
+[OK]         línea 35   ruta      src/main/java/com/taskflow/config/SecurityConfig.java  ->  src\main\java\com\taskflow\config\SecurityConfig.java
+[OK]         línea 37   clase     AuthController  ->  src\main\java\com\taskflow\controller\AuthController.java
+[OK]         línea 37   ruta      src/main/java/com/taskflow/controller/AuthController.java  ->  src\main\java\com\taskflow\controller\AuthController.java
+[REVISA]     línea 37   endpoint  /auth  ->  ningún controller la declara; la ruta sale en src\main\java\com\taskflow\advice\GlobalExceptionHandler.java (¿regla de seguridad, consola, recurso estático?)
+[OK]         línea 37   clase     AuthService  ->  src\main\java\com\taskflow\service\AuthService.java
+[OK]         línea 38   ruta      src/main/java/com/taskflow/service/AuthService.java  ->  src\main\java\com\taskflow\service\AuthService.java
+[OK]         línea 38   miembro   UserRepository.existsByUsername  ->  src\main\java\com\taskflow\repository\UserRepository.java
+[EXTERNA]    línea 38   clase     PasswordEncoder  ->  PasswordEncoder no es archivo del proyecto; el código la usa en 3 archivo(s), p. ej. src\main\java\com\taskflow\config\DataSeeder.java
+[OK]         línea 38   clase     User  ->  src\main\java\com\taskflow\model\User.java
+[EXTERNA]    línea 38   clase     AuthenticationManager  ->  AuthenticationManager no es archivo del proyecto; el código la usa en 2 archivo(s), p. ej. src\main\java\com\taskflow\config\SecurityConfig.java
+[EXTERNA]    línea 38   clase     UserDetails  ->  UserDetails no es archivo del proyecto; el código la usa en 4 archivo(s), p. ej. src\main\java\com\taskflow\security\JwtAuthenticationFilter.java
+[OK]         línea 38   clase     JwtService  ->  src\main\java\com\taskflow\security\JwtService.java
+[OK]         línea 39   ruta      src/main/java/com/taskflow/security/JwtService.java  ->  src\main\java\com\taskflow\security\JwtService.java
+[OK]         línea 40   clase     JwtAuthenticationFilter  ->  src\main\java\com\taskflow\security\JwtAuthenticationFilter.java
+[OK]         línea 40   ruta      src/main/java/com/taskflow/security/JwtAuthenticationFilter.java  ->  src\main\java\com\taskflow\security\JwtAuthenticationFilter.java
+[EXTERNA]    línea 40   clase     Authorization  ->  Authorization no es archivo del proyecto; el código la usa en 1 archivo(s), p. ej. src\main\resources\static\js\api.js
+[EXTERNA]    línea 40   clase     UserDetailsService  ->  UserDetailsService no es archivo del proyecto; el código la usa en 2 archivo(s), p. ej. src\main\java\com\taskflow\security\JwtAuthenticationFilter.java
+[OK]         línea 40   clase     JpaUserDetailsService  ->  src\main\java\com\taskflow\service\JpaUserDetailsService.java
+[EXTERNA]    línea 40   clase     Authentication  ->  Authentication no es archivo del proyecto; el código la usa en 4 archivo(s), p. ej. src\main\java\com\taskflow\controller\AuthController.java
+[REVISA]     línea 40   clase     SecurityContext  ->  SecurityContext no se usa en el código; solo sale en comentarios o textos, p. ej. src\main\java\com\taskflow\security\JwtAuthenticationFilter.java
+[OK]         línea 41   ruta      src/main/java/com/taskflow/service/JpaUserDetailsService.java  ->  src\main\java\com\taskflow\service\JpaUserDetailsService.java
+[OK]         línea 41   clase     UserRepository  ->  src\main\java\com\taskflow\repository\UserRepository.java
+[OK]         línea 41   nombre    passwordHash  ->  aparece en 2 archivo(s), p. ej. src\main\java\com\taskflow\model\User.java
+[OK]         línea 43   anotación @PreAuthorize  ->  se usa en 1 archivo(s), p. ej. src\main\java\com\taskflow\controller\ProjectController.java
+[OK]         línea 43   ruta      src/main/java/com/taskflow/security/ProjectSecurity.java  ->  src\main\java\com\taskflow\security\ProjectSecurity.java
+[OK]         línea 47   ruta      src/test/java/com/taskflow/unit  ->  src\test\java\com\taskflow\unit
+[OK]         línea 47   clase     TaskServiceTest  ->  src\test\java\com\taskflow\unit\TaskServiceTest.java
+[OK]         línea 47   clase     TaskValidationTest  ->  src\test\java\com\taskflow\unit\TaskValidationTest.java
+[OK]         línea 48   ruta      src/test/java/com/taskflow/slice  ->  src\test\java\com\taskflow\slice
+[OK]         línea 48   clase     TaskControllerTest  ->  src\test\java\com\taskflow\slice\TaskControllerTest.java
+[OK]         línea 48   clase     ProjectControllerTest  ->  src\test\java\com\taskflow\slice\ProjectControllerTest.java
+[OK]         línea 48   anotación @DataJpaTest  ->  se usa en 2 archivo(s), p. ej. src\test\java\com\taskflow\integration\TaskRepositoryPostgresIT.java
+[OK]         línea 48   anotación @WebMvcTest  ->  se usa en 2 archivo(s), p. ej. src\test\java\com\taskflow\slice\ProjectControllerTest.java
+[OK]         línea 49   ruta      src/test/java/com/taskflow/integration  ->  src\test\java\com\taskflow\integration
+[OK]         línea 49   anotación @SpringBootTest  ->  se usa en 5 archivo(s), p. ej. src\test\java\com\taskflow\integration\AuthControllerTest.java
+[OK]         línea 49   clase     TaskRepositoryPostgresIT  ->  src\test\java\com\taskflow\integration\TaskRepositoryPostgresIT.java
+[OK]         línea 56   anotación @RequestBody  ->  se usa en 3 archivo(s), p. ej. src\main\java\com\taskflow\controller\AuthController.java
+[OK]         línea 58   anotación @Enumerated  ->  se usa en 2 archivo(s), p. ej. src\main\java\com\taskflow\model\Task.java
+[OK]         línea 58   anotación @ManyToOne  ->  se usa en 1 archivo(s), p. ej. src\main\java\com\taskflow\model\Task.java
+[OK]         línea 64   ruta      src/main/java/com/taskflow/controller/ProjectController.java  ->  src\main\java\com\taskflow\controller\ProjectController.java
+[OK]         línea 66   ruta      src/main/java/com/taskflow/service/ProjectService.java  ->  src\main\java\com\taskflow\service\ProjectService.java
+[OK]         línea 68   ruta      src/main/java/com/taskflow/repository/ProjectRepository.java  ->  src\main\java\com\taskflow\repository\ProjectRepository.java
+[OK]         línea 22   clase     TaskRequest  ->  src\main\java\com\taskflow\dto\TaskRequest.java
+
+Sin verificar (15): el script no sabe comprobarlos; léelos tú:
+  `-Dtest=...` (l. 52), `*IT.java` (l. 49), `*Test` (l. 49), `201 Created` (l. 23), `400 Bad Request` (l. 24), `401` (l. 40), `crear` (l. 28), `docker-it` (l. 49), `login` (l. 38), `mvn -q test` (l. 52), `mvn test` (l. 49), `mvn test -Ddocker.tests=true` (l. 49), `record` (l. 56), `register` (l. 38), `username` (l. 41)
+
+Resumen: 79 OK · 4 REVISA · 8 EXTERNA · 0 NO EXISTE · 15 sin verificar

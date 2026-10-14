@@ -1,0 +1,276 @@
+{
+  "totalPremiumRequestCost": 0,
+  "totalUserRequests": 5,
+  "totalNanoAiu": 11880550000,
+  "aiCreditsStatus": "complete",
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 217398
+    },
+    "cache_read": {
+      "tokenCount": 1406194
+    },
+    "cache_write": {
+      "tokenCount": 0
+    },
+    "output": {
+      "tokenCount": 20365
+    }
+  },
+  "totalApiDurationMs": 249713,
+  "sessionStartTime": "2026-10-14T00:33:57.570Z",
+  "codeChanges": {
+    "linesAdded": 101,
+    "linesRemoved": 25,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "C:\\Users\\Lenovo\\taskflow-copilot-lissettzuniga\\docs\\ARQUITECTURA.md"
+    ]
+  },
+  "modelMetrics": {
+    "gpt-5-mini": {
+      "requests": {
+        "count": 37,
+        "cost": 0
+      },
+      "usage": {
+        "inputTokens": 1555014,
+        "outputTokens": 18098,
+        "cacheReadTokens": 1360640,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 10304
+      },
+      "cacheExpiresAt": "2026-10-14T02:14:43.245Z",
+      "totalNanoAiu": 11880550000,
+      "aiCreditsStatus": "complete",
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 194374
+        },
+        "cache_read": {
+          "tokenCount": 1360640
+        },
+        "cache_write": {
+          "tokenCount": 0
+        },
+        "output": {
+          "tokenCount": 18098
+        }
+      }
+    },
+    "copilot-search-a": {
+      "requests": {
+        "count": 7,
+        "cost": 0
+      },
+      "usage": {
+        "inputTokens": 68578,
+        "outputTokens": 2267,
+        "cacheReadTokens": 45554,
+        "cacheWriteTokens": 0
+      },
+      "totalNanoAiu": 0,
+      "aiCreditsStatus": "complete",
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 23024
+        },
+        "cache_read": {
+          "tokenCount": 45554
+        },
+        "cache_write": {
+          "tokenCount": 0
+        },
+        "output": {
+          "tokenCount": 2267
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 240749,
+      "totalNanoAiu": 11880550000,
+      "modelMetrics": {
+        "gpt-5-mini": {
+          "requests": {
+            "count": 37,
+            "cost": 0
+          },
+          "usage": {
+            "inputTokens": 1555014,
+            "outputTokens": 18098,
+            "cacheReadTokens": 1360640,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 10304
+          },
+          "totalNanoAiu": 11880550000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 194374
+            },
+            "cache_read": {
+              "tokenCount": 1360640
+            },
+            "cache_write": {
+              "tokenCount": 0
+            },
+            "output": {
+              "tokenCount": 18098
+            }
+          }
+        }
+      }
+    },
+    "call_XXnGmEE1UkrnxutRtGkNsOdj": {
+      "agentName": "search-subagent",
+      "agentDisplayName": "Search Subagent",
+      "totalApiDurationMs": 5978,
+      "totalNanoAiu": 0,
+      "modelMetrics": {
+        "copilot-search-a": {
+          "requests": {
+            "count": 4,
+            "cost": 0
+          },
+          "usage": {
+            "inputTokens": 45517,
+            "outputTokens": 1517,
+            "cacheReadTokens": 28335,
+            "cacheWriteTokens": 0
+          },
+          "totalNanoAiu": 0,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 17182
+            },
+            "cache_read": {
+              "tokenCount": 28335
+            },
+            "cache_write": {
+              "tokenCount": 0
+            },
+            "output": {
+              "tokenCount": 1517
+            }
+          }
+        }
+      }
+    },
+    "call_38JdEGW4k0eGXFxFphkNMFeZ": {
+      "agentName": "search-subagent",
+      "agentDisplayName": "Search Subagent",
+      "totalApiDurationMs": 2986,
+      "totalNanoAiu": 0,
+      "modelMetrics": {
+        "copilot-search-a": {
+          "requests": {
+            "count": 3,
+            "cost": 0
+          },
+          "usage": {
+            "inputTokens": 23061,
+            "outputTokens": 750,
+            "cacheReadTokens": 17219,
+            "cacheWriteTokens": 0
+          },
+          "totalNanoAiu": 0,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 5842
+            },
+            "cache_read": {
+              "tokenCount": 17219
+            },
+            "cache_write": {
+              "tokenCount": 0
+            },
+            "output": {
+              "tokenCount": 750
+            }
+          }
+        }
+      }
+    }
+  },
+  "providerModelMetrics": [
+    {
+      "provider": {
+        "id": "copilot",
+        "label": "GitHub Copilot",
+        "kind": "copilot"
+      },
+      "modelId": "gpt-5-mini",
+      "metrics": {
+        "requests": {
+          "count": 37,
+          "cost": 0
+        },
+        "usage": {
+          "inputTokens": 1555014,
+          "outputTokens": 18098,
+          "cacheReadTokens": 1360640,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 10304
+        },
+        "totalNanoAiu": 11880550000,
+        "aiCreditsStatus": "complete",
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 194374
+          },
+          "cache_read": {
+            "tokenCount": 1360640
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 18098
+          }
+        }
+      },
+      "modelDisplayName": "GPT-5 mini"
+    },
+    {
+      "provider": {
+        "id": "copilot",
+        "label": "GitHub Copilot",
+        "kind": "copilot"
+      },
+      "modelId": "copilot-search-a",
+      "metrics": {
+        "requests": {
+          "count": 7,
+          "cost": 0
+        },
+        "usage": {
+          "inputTokens": 68578,
+          "outputTokens": 2267,
+          "cacheReadTokens": 45554,
+          "cacheWriteTokens": 0
+        },
+        "totalNanoAiu": 0,
+        "aiCreditsStatus": "complete",
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 23024
+          },
+          "cache_read": {
+            "tokenCount": 45554
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 2267
+          }
+        }
+      },
+      "modelDisplayName": "Copilot Agent A"
+    }
+  ],
+  "currentModel": "gpt-5-mini",
+  "lastCallInputTokens": 52970,
+  "lastCallOutputTokens": 41
+}
