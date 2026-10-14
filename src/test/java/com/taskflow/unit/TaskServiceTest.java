@@ -199,9 +199,9 @@ class TaskServiceTest {
             }
         }
 
-        @Nested
-        @DisplayName("eliminar")
-        class Eliminar {
+    @Nested
+    @DisplayName("eliminar")
+    class Eliminar {
 
         @Test
         void eliminar_existente_llamaDeleteById() {
