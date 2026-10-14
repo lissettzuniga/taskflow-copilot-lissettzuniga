@@ -1,0 +1,70 @@
+ specs/overdue.md                                   | 42 ++++++++++++++++++++++
+ .../com/taskflow/controller/TaskController.java    |  9 +++++
+ .../java/com/taskflow/service/TaskService.java     | 11 ++++++
+ .../com/taskflow/slice/TaskControllerTest.java     | 19 ++++++++++
+ .../java/com/taskflow/unit/TaskServiceTest.java    | 22 ++++++++++++
+ 5 files changed, 103 insertions(+)
+19	0	src/test/java/com/taskflow/slice/TaskControllerTest.java
+22	0	src/test/java/com/taskflow/unit/TaskServiceTest.java
+
++    /** GET /tasks/overdue ÔÇö lista tareas vencidas (spec: usar Task.estaVencida y TaskOrders.POR_FECHA) */
++    /**
++     * Devuelve las tareas vencidas: usa la regla del dominio Task.estaVencida() y ordena por fecha
++     * ascendente usando TaskOrders.POR_FECHA (especificaci├│n).
++     */
++        // Dos tareas vencidas, la de id 2 tiene dueDate anterior y debe ir primera
++        // establecer dueDate reales: t2 m├ís antigua
++            // Datos reales: una vencida ayer en IN_PROGRESS, otra DONE y vencida (excluir), y otra sin fecha (excluir)
++            // Solo aparece la vencida y en orden por fecha ascendente (una sola queda)
+
+MUTANTE: quitado .sorted(TaskOrders.POR_FECHA) de vencidas()
+
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+RESTAURADO: TaskService.java quedó exactamente como estaba.
+
+
++                .andExpect(jsonPath("$[1].title").value("PrimeraVencida"));
+
+
++    /** GET /tasks/overdue ÔÇö lista tareas vencidas (spec: usar Task.estaVencida y TaskOrders.POR_FECHA) */
++     * Devuelve las tareas vencidas: usa la regla del dominio Task.estaVencida() y ordena por fecha
++     * ascendente usando TaskOrders.POR_FECHA (especificaci├│n).
++                .filter(Task::estaVencida)
++                .sorted(TaskOrders.POR_FECHA)
+
+
+[INFO] Tests run: 69, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+
+[INFO] Tests run: 69, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+MUTANTE: quitado .sorted(TaskOrders.POR_FECHA) de vencidas()
+
+[ERROR] Tests run: 8, Failures: 1, Errors: 0, Skipped: 0
+[INFO] BUILD FAILURE
+RESTAURADO: TaskService.java quedó exactamente como estaba.
+
+
+[INFO] Tests run: 69, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+16	0	src/test/java/com/taskflow/slice/TaskControllerTest.java
+31	0	src/test/java/com/taskflow/unit/TaskServiceTest.java
+
++    /** GET /tasks/overdue ÔÇö lista tareas vencidas (spec: usar Task.estaVencida y TaskOrders.POR_FECHA) */
++    /**
++     * Devuelve las tareas vencidas: usa la regla del dominio Task.estaVencida() y ordena por fecha
++     * ascendente usando TaskOrders.POR_FECHA (especificaci├│n).
++     */
++        // El mock devuelve una sola tarea vencida; el test verifica 200, id y title.
++            // El repositorio devuelve, en este orden:
++            // 1) vencida hace 1 d├¡a (IN_PROGRESS) -> incluido
++            // 2) con dueDate en 3 d├¡as (futuro) -> excluido
++            // 3) DONE vencida hace 10 d├¡as -> excluido
++            // 4) sin dueDate -> excluido
++            // 5) vencida hace 5 d├¡as (IN_PROGRESS) -> incluido
++            // Solo las dos vencidas (1d y 5d), ordenadas por dueDate ascendente -> 5d antes que 1d
+
