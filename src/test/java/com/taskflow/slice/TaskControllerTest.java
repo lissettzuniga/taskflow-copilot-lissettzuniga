@@ -22,6 +22,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.matchesPattern;
@@ -86,6 +87,24 @@ class TaskControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].title").value("Primera"));
+    }
+
+    @Test
+    void getOverdue_returns200AndOrderedList() throws Exception {
+        // Dos tareas vencidas, la de id 2 tiene dueDate anterior y debe ir primera
+        Task t1 = tareaCon(1L, "PrimeraVencida", TaskStatus.IN_PROGRESS, 1L);
+        Task t2 = tareaCon(2L, "MasVencida", TaskStatus.IN_PROGRESS, 1L);
+        // establecer dueDate reales: t2 más antigua
+        t1 = new Task(1L, t1.getTitle(), t1.getDescription(), t1.getStatus(), t1.getPriority(), t1.getProjectId(), t1.getAssigneeId(), LocalDate.now().minusDays(2));
+        t2 = new Task(2L, t2.getTitle(), t2.getDescription(), t2.getStatus(), t2.getPriority(), t2.getProjectId(), t2.getAssigneeId(), LocalDate.now().minusDays(5));
+
+        when(taskService.vencidas()).thenReturn(List.of(t2, t1));
+
+        mockMvc.perform(get("/tasks/overdue"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].title").value("MasVencida"))
+                .andExpect(jsonPath("$[1].title").value("PrimeraVencida"));
     }
 
     @Test

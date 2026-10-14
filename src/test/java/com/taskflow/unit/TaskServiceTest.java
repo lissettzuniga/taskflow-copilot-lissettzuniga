@@ -18,6 +18,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -127,6 +129,26 @@ class TaskServiceTest {
                     () -> service.cambiarStatus(2L, TaskStatus.DONE));
             // El never() es el assert más valioso del bloque: la regla PROHIBIÓ persistir.
             verify(repository, never()).save(any(Task.class));
+        }
+    }
+
+    @Nested
+    @DisplayName("vencidas")
+    class Vencidas {
+
+        @Test
+        void vencidas_filtraSoloVencidasYOrdenaPorFecha() throws Exception {
+            // Datos reales: una vencida ayer en IN_PROGRESS, otra DONE y vencida (excluir), y otra sin fecha (excluir)
+            Task vencida = new Task(10L, "Vencida", "desc", TaskStatus.IN_PROGRESS, Priority.MED, PROYECTO, 1L, LocalDate.now().minusDays(5));
+            Task hecha = new Task(11L, "Hecha", "desc", TaskStatus.DONE, Priority.HIGH, PROYECTO, 1L, LocalDate.now().minusDays(10));
+            Task sinFecha = new Task(12L, "SinFecha", "desc", TaskStatus.TODO, Priority.LOW, PROYECTO, 1L, null);
+            when(repository.findAll()).thenReturn(List.of(vencida, hecha, sinFecha));
+
+            List<Task> resultado = service.vencidas();
+
+            // Solo aparece la vencida y en orden por fecha ascendente (una sola queda)
+            org.junit.jupiter.api.Assertions.assertEquals(1, resultado.size());
+            org.junit.jupiter.api.Assertions.assertEquals(10L, resultado.get(0).getId());
         }
     }
 
