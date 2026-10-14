@@ -138,17 +138,26 @@ class TaskServiceTest {
 
         @Test
         void vencidas_filtraSoloVencidasYOrdenaPorFecha() throws Exception {
-            // Datos reales: una vencida ayer en IN_PROGRESS, otra DONE y vencida (excluir), y otra sin fecha (excluir)
-            Task vencida = new Task(10L, "Vencida", "desc", TaskStatus.IN_PROGRESS, Priority.MED, PROYECTO, 1L, LocalDate.now().minusDays(5));
-            Task hecha = new Task(11L, "Hecha", "desc", TaskStatus.DONE, Priority.HIGH, PROYECTO, 1L, LocalDate.now().minusDays(10));
-            Task sinFecha = new Task(12L, "SinFecha", "desc", TaskStatus.TODO, Priority.LOW, PROYECTO, 1L, null);
-            when(repository.findAll()).thenReturn(List.of(vencida, hecha, sinFecha));
+            // El repositorio devuelve, en este orden:
+            // 1) vencida hace 1 día (IN_PROGRESS) -> incluido
+            // 2) con dueDate en 3 días (futuro) -> excluido
+            // 3) DONE vencida hace 10 días -> excluido
+            // 4) sin dueDate -> excluido
+            // 5) vencida hace 5 días (IN_PROGRESS) -> incluido
+            Task vencida1d = new Task(1L, "V1d", "desc", TaskStatus.IN_PROGRESS, Priority.MED, PROYECTO, 1L, LocalDate.now().minusDays(1));
+            Task futuro = new Task(2L, "Futuro", "desc", TaskStatus.TODO, Priority.LOW, PROYECTO, 1L, LocalDate.now().plusDays(3));
+            Task hechaVencida = new Task(3L, "HechaVencida", "desc", TaskStatus.DONE, Priority.HIGH, PROYECTO, 1L, LocalDate.now().minusDays(10));
+            Task sinFecha = new Task(4L, "SinFecha", "desc", TaskStatus.TODO, Priority.MED, PROYECTO, 1L, null);
+            Task vencida5d = new Task(5L, "V5d", "desc", TaskStatus.IN_PROGRESS, Priority.MED, PROYECTO, 1L, LocalDate.now().minusDays(5));
+
+            when(repository.findAll()).thenReturn(List.of(vencida1d, futuro, hechaVencida, sinFecha, vencida5d));
 
             List<Task> resultado = service.vencidas();
 
-            // Solo aparece la vencida y en orden por fecha ascendente (una sola queda)
-            org.junit.jupiter.api.Assertions.assertEquals(1, resultado.size());
-            org.junit.jupiter.api.Assertions.assertEquals(10L, resultado.get(0).getId());
+            // Solo las dos vencidas (1d y 5d), ordenadas por dueDate ascendente -> 5d antes que 1d
+            org.junit.jupiter.api.Assertions.assertEquals(2, resultado.size());
+            org.junit.jupiter.api.Assertions.assertEquals(5L, resultado.get(0).getId());
+            org.junit.jupiter.api.Assertions.assertEquals(1L, resultado.get(1).getId());
         }
     }
 

@@ -90,21 +90,18 @@ class TaskControllerTest {
     }
 
     @Test
-    void getOverdue_returns200AndOrderedList() throws Exception {
-        // Dos tareas vencidas, la de id 2 tiene dueDate anterior y debe ir primera
-        Task t1 = tareaCon(1L, "PrimeraVencida", TaskStatus.IN_PROGRESS, 1L);
-        Task t2 = tareaCon(2L, "MasVencida", TaskStatus.IN_PROGRESS, 1L);
-        // establecer dueDate reales: t2 más antigua
-        t1 = new Task(1L, t1.getTitle(), t1.getDescription(), t1.getStatus(), t1.getPriority(), t1.getProjectId(), t1.getAssigneeId(), LocalDate.now().minusDays(2));
-        t2 = new Task(2L, t2.getTitle(), t2.getDescription(), t2.getStatus(), t2.getPriority(), t2.getProjectId(), t2.getAssigneeId(), LocalDate.now().minusDays(5));
+    void getOverdue_returns200AndSingleTask() throws Exception {
+        // El mock devuelve una sola tarea vencida; el test verifica 200, id y title.
+        Task t = tareaCon(7L, "Corregir bug de fechas", TaskStatus.IN_PROGRESS, 1L);
+        t = new Task(7L, t.getTitle(), t.getDescription(), t.getStatus(), t.getPriority(), t.getProjectId(), t.getAssigneeId(), LocalDate.now().minusDays(1));
 
-        when(taskService.vencidas()).thenReturn(List.of(t2, t1));
+        when(taskService.vencidas()).thenReturn(List.of(t));
 
         mockMvc.perform(get("/tasks/overdue"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].title").value("MasVencida"))
-                .andExpect(jsonPath("$[1].title").value("PrimeraVencida"));
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].id").value(7))
+                .andExpect(jsonPath("$[0].title").value("Corregir bug de fechas"));
     }
 
     @Test
