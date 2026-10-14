@@ -72,6 +72,24 @@ public class TaskController {
         return tareas.stream().map(TaskMapper::aResponse).toList();
     }
 
+    /** GET /tasks/overdue — lista tareas vencidas (spec: usar Task.estaVencida y TaskOrders.POR_FECHA) */
+    @Operation(summary = "Lista tareas vencidas",
+            description = "Lista todas las tareas vencidas, ordenadas por fecha ascendente.")
+    @GetMapping("/tasks/overdue")
+    public List<TaskResponse> getOverdueTasks() {
+        List<Task> vencidas = taskService.vencidas();
+        return vencidas.stream().map(TaskMapper::aResponse).toList();
+    }
+
+    /** GET /tasks/unassigned — lista tareas sin responsable (spec: ReportService.SIN_ASIGNAR, TaskOrders.POR_FECHA) */
+    @Operation(summary = "Lista tareas sin responsable",
+            description = "Lista todas las tareas sin responsable, ordenadas por fecha ascendente.")
+    @GetMapping("/tasks/unassigned")
+    public List<TaskResponse> getUnassignedTasks() {
+        List<Task> sin = taskService.sinResponsable();
+        return sin.stream().map(TaskMapper::aResponse).toList();
+    }
+
     /** GET /tasks/{id} — 200 con TaskResponse, o 404 uniforme (orElseThrow -> advice). */
     @Operation(summary = "Obtiene una tarea por id",
             description = "200 con el TaskResponse; 404 uniforme si el id no existe.")

@@ -18,6 +18,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -129,6 +131,73 @@ class TaskServiceTest {
             verify(repository, never()).save(any(Task.class));
         }
     }
+
+    @Nested
+    @DisplayName("vencidas")
+    class Vencidas {
+
+        @Test
+        void vencidas_filtraSoloVencidasYOrdenaPorFecha() throws Exception {
+            // El repositorio devuelve, en este orden:
+            // 1) vencida hace 1 día (IN_PROGRESS) -> incluido
+            // 2) con dueDate en 3 días (futuro) -> excluido
+            // 3) DONE vencida hace 10 días -> excluido
+            // 4) sin dueDate -> excluido
+            // 5) vencida hace 5 días (IN_PROGRESS) -> incluido
+            Task vencida1d = new Task(1L, "V1d", "desc", TaskStatus.IN_PROGRESS, Priority.MED, PROYECTO, 1L, LocalDate.now().minusDays(1));
+            Task futuro = new Task(2L, "Futuro", "desc", TaskStatus.TODO, Priority.LOW, PROYECTO, 1L, LocalDate.now().plusDays(3));
+            Task hechaVencida = new Task(3L, "HechaVencida", "desc", TaskStatus.DONE, Priority.HIGH, PROYECTO, 1L, LocalDate.now().minusDays(10));
+            Task sinFecha = new Task(4L, "SinFecha", "desc", TaskStatus.TODO, Priority.MED, PROYECTO, 1L, null);
+            Task vencida5d = new Task(5L, "V5d", "desc", TaskStatus.IN_PROGRESS, Priority.MED, PROYECTO, 1L, LocalDate.now().minusDays(5));
+
+            when(repository.findAll()).thenReturn(List.of(vencida1d, futuro, hechaVencida, sinFecha, vencida5d));
+
+            List<Task> resultado = service.vencidas();
+
+            // Solo las dos vencidas (1d y 5d), ordenadas por dueDate ascendente -> 5d antes que 1d
+            org.junit.jupiter.api.Assertions.assertEquals(2, resultado.size());
+            org.junit.jupiter.api.Assertions.assertEquals(5L, resultado.get(0).getId());
+            org.junit.jupiter.api.Assertions.assertEquals(1L, resultado.get(1).getId());
+        }
+    }
+
+    @Nested
+        @DisplayName("SinResponsable")
+        class SinResponsable {
+
+            @Test
+            void devuelveSoloLasSinResponsable_ordenadasPorFecha() throws TaskValidationException {
+                // El repositorio devuelve, en este orden:
+                // 1) sin responsable con dueDate en 10 días
+                // 2) CON responsable
+                // 3) sin responsable sin dueDate
+                // 4) sin responsable con dueDate en 2 días
+                Task t10 = new Task(10L, "T10", "d", TaskStatus.TODO, Priority.MED, PROYECTO, null, LocalDate.now().plusDays(10));
+                Task withAssignee = new Task(11L, "Con", "d", TaskStatus.TODO, Priority.MED, PROYECTO, 5L, LocalDate.now().plusDays(5));
+                Task tNoDate = new Task(12L, "SinFecha", "d", TaskStatus.TODO, Priority.MED, PROYECTO, null, null);
+                Task t2 = new Task(13L, "T02", "d", TaskStatus.TODO, Priority.MED, PROYECTO, null, LocalDate.now().plusDays(2));
+
+                when(repository.findAll()).thenReturn(List.of(t10, withAssignee, tNoDate, t2));
+
+                List<Task> resultado = service.sinResponsable();
+
+                List<Long> ids = resultado.stream().map(Task::getId).toList();
+                // Orden esperado: 2 días (13), 10 días (10), sin fecha (12)
+                assertEquals(List.of(13L, 10L, 12L), ids);
+            }
+
+            @Test
+            void devuelveListaVacia_siTodasTienenResponsable() throws TaskValidationException {
+                Task a = new Task(21L, "Aaa", "d", TaskStatus.TODO, Priority.LOW, PROYECTO, 2L, null);
+                Task b = new Task(22L, "Bbb", "d", TaskStatus.IN_PROGRESS, Priority.HIGH, PROYECTO, 3L, LocalDate.now().plusDays(1));
+
+                when(repository.findAll()).thenReturn(List.of(a, b));
+
+                List<Task> resultado = service.sinResponsable();
+
+                assertEquals(0, resultado.size());
+            }
+        }
 
     @Nested
     @DisplayName("eliminar")
