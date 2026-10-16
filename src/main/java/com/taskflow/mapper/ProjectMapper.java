@@ -21,4 +21,16 @@ public final class ProjectMapper {
         return new ProjectResponse(p.getId(), p.getName(), p.getDescription(),
                 p.getOwnerId(), p.getCreatedAt());
     }
+
+    /**
+     * Entidad -> DTO de resumen de proyecto. El servicio calcula los contadores y entrega
+     * los valores; el mapper solo construye el DTO final.
+     */
+    public static com.taskflow.dto.ProjectSummaryResponse aSummary(Project p,
+                                                                   int totalTasks,
+                                                                   java.util.Map<String, Integer> byStatus,
+                                                                   int overdue) {
+        return new com.taskflow.dto.ProjectSummaryResponse(
+                p.getId(), p.getName(), totalTasks, byStatus, overdue);
+    }
 }
