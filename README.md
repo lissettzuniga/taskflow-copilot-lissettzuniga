@@ -210,3 +210,5 @@ y te manda a revisar si el demonio está encendido, que no era el problema.
   UI estática mínima (login, proyectos, tareas) desde `src/main/resources/static/`, abierta en
   `SecurityConfig` con un `permitAll()` para `/`, `/*.html`, `/css/**` y `/js/**`; sin él, con el
   `anyRequest().authenticated()`, hasta el CSS respondería `401`.
+
+## Temas Java 7-12 
